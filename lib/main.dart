@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:rive/rive.dart';
+import 'package:rive_animations/home_page.dart';
+import 'package:rive_animations/rive/rive_car_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +15,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LiquidDownload(),
+      home: const HomePage(),
+      initialBinding: ControllerBindings(),
     );
+  }
+}
+
+class ControllerBindings extends Bindings {
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
+    Get.put(RiveCarController());
   }
 }
 
@@ -46,7 +58,7 @@ class _LiquidDownloadState extends State<LiquidDownload> {
 
     // Load the animation file from the bundle, note that you could also
     // download this. The RiveFile just expects a list of bytes.
-    rootBundle.load('assets/2857-5946-windy-tree.riv').then(
+    rootBundle.load('assets/vehicles.riv').then(
       (data) async {
         // Load the RiveFile from the binary data.
         final file = RiveFile.import(data);
@@ -54,7 +66,8 @@ class _LiquidDownloadState extends State<LiquidDownload> {
         // The artboard is the root of the animation and gets drawn in the
         // Rive widget.
         final artboard = file.mainArtboard
-          ..addController(SimpleAnimation("Animation 1"));
+          ..addController(SimpleAnimation("idle"));
+
         for (var element in artboard.animations) {
           print(element.name);
         }
