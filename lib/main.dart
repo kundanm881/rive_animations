@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:rive_animations/home_page.dart';
 import 'package:rive_animations/rive/rive_car_controller.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
