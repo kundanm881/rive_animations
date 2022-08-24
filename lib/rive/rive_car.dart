@@ -13,7 +13,6 @@ class RiveCar extends StatefulWidget {
 class _RiveCarState extends State<RiveCar> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     RiveCarController.instance.getArtBoard();
   }
@@ -24,12 +23,13 @@ class _RiveCarState extends State<RiveCar> {
       children: [
         GetBuilder<RiveCarController>(builder: (snap) {
           return (snap.artboard == null)
-              ? Text("Wait")
-              : Container(
+              ? const Text("Wait")
+              : SizedBox(
                   height: 400,
                   // width: 400,
                   child: Rive(artboard: snap.artboard!));
         }),
+        //
         ElevatedButton(
             onPressed: () {
               RiveCarController.instance.bounceAnim();
