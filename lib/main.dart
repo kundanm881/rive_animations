@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:rive_animations/home_page.dart';
+import 'package:rive_animations/contollers/state_controllers.dart';
+import 'package:rive_animations/pix.dart';
 import 'package:rive_animations/rive/rive_car_controller.dart';
 
 void main() async {
@@ -12,11 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
-      initialBinding: ControllerBindings(),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      builder: (context, child) => GetMaterialApp(
+        title: 'Flutter Demo',
+        navigatorKey: StateControllers.instance.navigator,
+        scaffoldMessengerKey: StateControllers.instance.scaffoldMessenger,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const Pix(),
+        initialBinding: ControllerBindings(),
+      ),
     );
   }
 }
